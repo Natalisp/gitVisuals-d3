@@ -1,8 +1,8 @@
 function renderCharts(repos) {
 
 // BAR CHART
-  var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  var reposCount =  months.map(function(month){
+  var m = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  var reposCount =  m.map(function(month){
       return getRepoCount(month, repos);
   });
 
@@ -21,7 +21,7 @@ var y = d3.scaleLinear()
           .range([600,0]);
 var x = d3.scaleOrdinal()
           .domain(months)
-          .range([0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200])
+          .range([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200])
 
 var yAxis = d3.axisLeft(y);
 var xAxis = d3.axisBottom(x);
@@ -39,7 +39,7 @@ var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "
             .attr("fill", function(d) {
       					return "rgb(0, 0, " + (d*10) + ")";
       			   })
-            .attr("x", function(d, i){ return i*60 ; })
+            .attr("x", function(d, i){ return i*100 ; })
             .attr("y", function(d, i){ return 600-(d*8); });
 
     svg.selectAll("text")
@@ -49,19 +49,19 @@ var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "
 			   		return d;
 			  })
         .attr("x", function(d, i) {
-			   		return (i*60)+65;
+			   		return (i*100)+65;
 			   })
 			  .attr("y", function(d) {
           if(d>1) {
-            return 660-(d*8);
+            return 620-(d*8);
           }
 			   })
          .attr("font-family", "sans-serif")
 			   .attr("font-size", "16px")
-			   .attr("fill", "white");
+			   .attr("fill", "black");
 
-  chartGroup.append("g").attr("class", "axis y").call(yAxis);
-  chartGroup.append("g").attr("class", "axis x").attr("transform", "translate(0,600)").call(xAxis);
+  // chartGroup.append("g").attr("class", "axis y").call(yAxis);
+  svg.append("g").attr("class", "axis x").attr("transform", "translate(0,650)").call(xAxis);
 
 
   // var ctx = document.getElementById("barChart");
