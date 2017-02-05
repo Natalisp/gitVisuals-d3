@@ -105,7 +105,7 @@ li {
 
 .dotstyle-fillin li a {
   background-color: transparent;
-  box-shadow: inset 0 0 0 2px #ca4444;
+  box-shadow: inset 0 0 0 2px #e0dfdc;
   -webkit-transition: box-shadow 0.3s ease;
   transition: box-shadow 0.3s ease;
 }
@@ -115,7 +115,7 @@ li {
 }
 
 .dotstyle-fillin li a:focus {
-  box-shadow: 0px 0px 0px 8px #ca4444 inset;
+  box-shadow: 0px 0px 0px 8px #e0dfdc inset;
 }
 
 .dotstyle-fillin li.current a {

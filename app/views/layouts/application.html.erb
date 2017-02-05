@@ -2,12 +2,13 @@
 <html>
   <head>
     <title>Gitvisuals</title>
+    <meta content="utf-8" http-equiv="encoding">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  </head>
+    <script src="../../assets/javascripts/d3.min.js"></script>
+    </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
     <div id="fullpage">

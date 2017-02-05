@@ -13,59 +13,110 @@ function renderCharts(repos) {
   }).length;
   }
 
-  var ctx = document.getElementById("barChart");
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Repos Created',
-            data: reposCount,
-            backgroundColor: "#ca4444",
-            borderColor: "#fff",
-            borderWidth: 3,
-            fontSize: 30
-        }]
-    },
-    options: {
-      responsive: true,
-      title: 'REPOS',
-      tooltips: {
-        titleFontSize: 0,
-        bodyFontSize: 35,
-        callbacks: {
-          label: function(tooltipItems, data) {
-              return tooltipItems.yLabel + ' repos created in ' + tooltipItems.xLabel ;
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var margin = { left:50, right:50, top:40, bottom:0};
+
+var y = d3.scaleLinear()
+          .domain([0,100])
+          .range([600,0]);
+var x = d3.scaleOrdinal()
+          .domain(months)
+          .range([0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200])
+
+var yAxis = d3.axisLeft(y);
+var xAxis = d3.axisBottom(x);
+
+
+var svg = d3.select(".d3Bar").append("svg").attr("height","100%").attr("width","100%");
+
+var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "+margin.top+")")
+
+  chartGroup.selectAll("rect")
+    .data(reposCount)
+    .enter().append("rect")
+            .attr("height", function(d, i){ return d*8 ; })
+            .attr("width", "50")
+            .attr("fill", function(d) {
+      					return "rgb(0, 0, " + (d*10) + ")";
+      			   })
+            .attr("x", function(d, i){ return i*60 ; })
+            .attr("y", function(d, i){ return 600-(d*8); });
+
+    svg.selectAll("text")
+       .data(reposCount)
+       .enter().append("text")
+       .text(function(d) {
+			   		return d;
+			  })
+        .attr("x", function(d, i) {
+			   		return (i*60)+65;
+			   })
+			  .attr("y", function(d) {
+          if(d>1) {
+            return 660-(d*8);
           }
-      }
-      },
-        scales: {
-          gridLines: {
-            lineWidth: 3
-          },
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true,
-                    fontSize: 30
-                }
-              }],
-            xAxes: [{
-            ticks: {
-                fontSize: 30,
-                display: true
-              },
-            barPercentage: 1
-        }]
-      },
-      legend: {
-          position: 'top',
-          labels: {
-            padding: 15,
-            fontSize: 30
-          }
-      }
-    }
-});
+			   })
+         .attr("font-family", "sans-serif")
+			   .attr("font-size", "16px")
+			   .attr("fill", "white");
+
+  chartGroup.append("g").attr("class", "axis y").call(yAxis);
+  chartGroup.append("g").attr("class", "axis x").attr("transform", "translate(0,600)").call(xAxis);
+
+
+  // var ctx = document.getElementById("barChart");
+//   var myChart = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+//         datasets: [{
+//             label: 'Repos Created',
+//             data: reposCount,
+//             backgroundColor: "#ca4444",
+//             borderColor: "#fff",
+//             borderWidth: 3,
+//             fontSize: 30
+//         }]
+//     },
+//     options: {
+//       responsive: true,
+//       title: 'REPOS',
+//       tooltips: {
+//         titleFontSize: 0,
+//         bodyFontSize: 35,
+//         callbacks: {
+//           label: function(tooltipItems, data) {
+//               return tooltipItems.yLabel + ' repos created in ' + tooltipItems.xLabel ;
+//           }
+//       }
+//       },
+//         scales: {
+//           gridLines: {
+//             lineWidth: 3
+//           },
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero:true,
+//                     fontSize: 30
+//                 }
+//               }],
+//             xAxes: [{
+//             ticks: {
+//                 fontSize: 30,
+//                 display: true
+//               },
+//             barPercentage: 1
+//         }]
+//       },
+//       legend: {
+//           position: 'top',
+//           labels: {
+//             padding: 15,
+//             fontSize: 30
+//           }
+//       }
+//     }
+// });
 
 //pieChart
 

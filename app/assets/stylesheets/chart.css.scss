@@ -1,16 +1,40 @@
+svg {
+  display: block;
+  margin-left: 30vh;
+  }
+
+.d3Bar {
+   margin: 0 auto;
+   width: 70vw;
+   height: 70vh;
+}
+
+g.tick text {
+  font-size: 20px;
+  fill: black;
+}
+
+g.tick line {
+   visibility: hidden;
+}
+
+// g.hidden line {
+//   display: none;
+// }
+
 #barChart {
-  width: 750px !important;
-  height: 700px !important;
+  width: 650px !important;
+  height: 600px !important;
 }
 
 #pieChart {
-  width: 650px !important;
-  height: 650px !important;
+  width: 600px !important;
+  height: 600px !important;
 }
 
 #commitsChart {
-  width: 750px !important;
-  height: 700px !important;
+  width: 650px !important;
+  height: 600px !important;
 }
 canvas {
   margin: auto;
