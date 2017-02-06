@@ -1,21 +1,19 @@
 svg {
   display: block;
-  margin-left: 5vw;
+  margin-left: 25vw;
   }
 
 .d3Bar {
    margin: 0 auto;
-   width: 70vw;
-   height: 70vh;
 }
 
 g.tick text {
-  font-size: 20px;
+  font-size: 12px;
   fill: black;
 }
 
 g.tick line {
-   visibility: hidden;
+   display: none;
 }
 
 

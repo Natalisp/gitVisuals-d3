@@ -19,15 +19,15 @@ var margin = { left:50, right:50, top:40, bottom:0};
 var y = d3.scaleLinear()
           .domain([0,100])
           .range([600,0]);
-var x = d3.scaleOrdinal()
+var x = d3.scalePoint()
           .domain(months)
-          .range([100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200])
+          .range([120, 800])
 
 var yAxis = d3.axisLeft(y);
 var xAxis = d3.axisBottom(x);
 
 
-var svg = d3.select(".d3Bar").append("svg").attr("height","100%").attr("width","100%");
+var svg = d3.select(".d3Bar").append("svg").attr("height","700").attr("width","1000");
 
 var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "+margin.top+")")
 
@@ -39,7 +39,7 @@ var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "
             .attr("fill", function(d) {
       					return "rgb(0, 0, " + (d*10) + ")";
       			   })
-            .attr("x", function(d, i){ return i*100 ; })
+            .attr("x", function(d, i){ return (i*60)+60 ; })
             .attr("y", function(d, i){ return 600-(d*8); });
 
     svg.selectAll("text")
@@ -49,7 +49,7 @@ var chartGroup = svg.append("g").attr("transform", "translate("+margin.left+", "
 			   		return d;
 			  })
         .attr("x", function(d, i) {
-			   		return (i*100)+65;
+			   		return (i*60)+125;
 			   })
 			  .attr("y", function(d) {
           if(d>1) {
