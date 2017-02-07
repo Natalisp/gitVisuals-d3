@@ -13,14 +13,31 @@ function renderCharts(repos) {
   }).length;
   }
 
-console.log(reposCount);
+  nv.addGraph(function() {
+    var chart = nv.models.discreteBarChart()
 
+    chart.x(function(d) { return d.label })
+    chart.y(function(d) { return d.value })
+    ;
+
+    d3.select("#chart svg")
+        .datum(myData(reposCount))
+        .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(
+            function() {
+                chart.update();
+            }
+        );
+
+    return chart;
+});
 
 function myData(repos) {
 
     return [
         {
-            key: "Series #1",
+            key: "repos",
             values:
             [
               {
@@ -76,29 +93,6 @@ function myData(repos) {
         }
     ];
 }
-
-nv.addGraph(function() {
-  var width = 1600, height=600;
-
-    var chart = nv.models.discreteBarChart()
-    
-    chart.x(function(d) { return d.label })
-    chart.y(function(d) { return d.value })
-    ;
-
-    d3.select("#chart svg")
-        .datum(myData(reposCount))
-        .transition().duration(500).call(chart);
-
-    nv.utils.windowResize(
-            function() {
-                chart.update();
-            }
-        );
-
-    return chart;
-});
-
 
 
 //   var ctx = document.getElementById("barChart");
